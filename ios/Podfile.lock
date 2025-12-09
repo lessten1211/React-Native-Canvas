@@ -15,6 +15,9 @@ PODS:
     - hermes-engine/Pre-built (= 0.72.1)
   - hermes-engine/Pre-built (0.72.1)
   - libevent (2.1.12)
+  - LookinServer (1.2.8):
+    - LookinServer/Core (= 1.2.8)
+  - LookinServer/Core (1.2.8)
   - RCT-Folly (2021.07.22.00):
     - boost
     - DoubleConversion
@@ -435,6 +438,7 @@ DEPENDENCIES:
   - glog (from `../node_modules/react-native/third-party-podspecs/glog.podspec`)
   - hermes-engine (from `../node_modules/react-native/sdks/hermes-engine/hermes-engine.podspec`)
   - libevent (~> 2.1.12)
+  - LookinServer
   - RCT-Folly (from `../node_modules/react-native/third-party-podspecs/RCT-Folly.podspec`)
   - RCTRequired (from `../node_modules/react-native/Libraries/RCTRequired`)
   - RCTTypeSafety (from `../node_modules/react-native/Libraries/TypeSafety`)
@@ -474,6 +478,7 @@ SPEC REPOS:
   trunk:
     - fmt
     - libevent
+    - LookinServer
     - SocketRocket
 
 EXTERNAL SOURCES:
@@ -561,11 +566,12 @@ SPEC CHECKSUMS:
   boost: 7dcd2de282d72e344012f7d6564d024930a6a440
   DoubleConversion: 5189b271737e1565bdce30deb4a08d647e3f5f54
   FBLazyVector: 55cd4593d570bd9e5e227488d637ce6a9581ce51
-  FBReactNativeSpec: 12eb7b842b2cd628aca1e09af86b90cb8849166a
+  FBReactNativeSpec: 799b0e1a1561699cd0e424e24fe5624da38402f0
   fmt: ff9d55029c625d3757ed641535fd4a75fedc7ce9
   glog: 04b94705f318337d7ead9e6d17c019bd9b1f6b1b
   hermes-engine: 9df83855a0fd15ef8eb61694652bae636b0c466e
   libevent: 4049cae6c81cdb3654a443be001fb9bdceff7913
+  LookinServer: 1b2b61c6402ae29fa22182d48f5cd067b4e99e80
   RCT-Folly: 8dc08ca5a393b48b1c523ab6220dfdcc0fe000ad
   RCTRequired: c52ee8fb2b35c1b54031dd8e92d88ad4dba8f2ce
   RCTTypeSafety: 75fa444becadf0ebfa0a456b8c64560c7c89c7df
@@ -593,7 +599,7 @@ SPEC CHECKSUMS:
   React-RCTSettings: a76aee44d5398144646be146c334b15c90ad9582
   React-RCTText: afad390f3838f210c2bc9e1a19bb048003b2a771
   React-RCTVibration: 29bbaa5c57c02dc036d7e557584b492000b1d3e7
-  React-rncore: 0aa61b3d7cbb74b71f0ecb081291a245e68d0f42
+  React-rncore: 50966ce412d63bee9ffe5c98249857c23870a3c4
   React-runtimeexecutor: d129f2b53d61298093d7c7d8ebfafa664f911ce6
   React-runtimescheduler: c8f959651fd874b93feeb32781b1e402a6801ec2
   React-utils: c9e15d684b491d6324b4139790306836f0e8b1d6
@@ -601,6 +607,6 @@ SPEC CHECKSUMS:
   SocketRocket: f32cd54efbe0f095c4d7594881e52619cfe80b17
   Yoga: 65286bb6a07edce5e4fe8c90774da977ae8fc009
 
-PODFILE CHECKSUM: cd95c902b8b66538b261f176df1b2e88c6fa175b
+PODFILE CHECKSUM: 966776d7ee09970123477d48455ed3f7e9316e8b
 
 COCOAPODS: 1.16.2
