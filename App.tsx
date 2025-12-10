@@ -7,7 +7,8 @@ import {
   View,
   useColorScheme,
 } from 'react-native';
-import {SkiaDemo} from './components/SkiaDemo';
+// import {SkiaDemo} from './components/SkiaDemo';
+import InteractiveGLView from './components/InteractiveGLView';
 
 function App(): JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
@@ -19,12 +20,12 @@ function App(): JSX.Element {
         backgroundColor="#1a1a2e"
       />
       <View style={styles.header}>
-        <Text style={styles.title}>🎨 React Native Skia Demo</Text>
+        <Text style={styles.title}>🎮 Interactive WebGL Demo</Text>
         <Text style={styles.subtitle}>
-          展示渐变、图形和路径绘制
+          水平拖动旋转 · 垂直拖动缩放11
         </Text>
       </View>
-      <SkiaDemo />
+      <InteractiveGLView />
     </SafeAreaView>
   );
 }

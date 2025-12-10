@@ -1,3 +1,4 @@
+require File.join(File.dirname(`node --print "require.resolve('expo/package.json')"`), "scripts/autolinking")
 platform :ios, '14.0'
 
 require_relative '../node_modules/react-native/scripts/react_native_pods'
@@ -8,6 +9,20 @@ prepare_react_native_project!
 flipper_config = FlipperConfiguration.disabled
 
 target 'RnTest' do
+  use_modular_headers!
+  
+  # Expo modules
+  pod 'ExpoModulesCore', :path => '../node_modules/expo-modules-core'
+  use_expo_modules!
+  
+  post_integrate do |installer|
+    begin
+      expo_patch_react_imports!(installer)
+    rescue => e
+      Pod::UI.warn e
+    end
+  end
+  
   config = use_native_modules!
 
   flags = get_default_flags()
@@ -19,8 +34,7 @@ target 'RnTest' do
     :flipper_configuration => flipper_config,
     :app_path => "#{Pod::Config.instance.installation_root}/.."
   )
-
-  # ✅ Lookin
+  
   pod 'LookinServer', :configurations => ['Debug']
 
   target 'RnTestTests' do
@@ -29,5 +43,39 @@ target 'RnTest' do
 
   post_install do |installer|
     react_native_post_install(installer)
+    
+    # Fix deployment target for all pods
+    installer.pods_project.targets.each do |target|
+      target.build_configurations.each do |config|
+        config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '14.0'
+      end
+    end
+    
+    # Fix for RCT-Folly on Xcode 15+
+    find_and_replace("Pods/RCT-Folly/folly/portability/Time.h",
+      "typedef uint8_t clockid_t;", "// typedef uint8_t clockid_t;")
+    find_and_replace("Pods/RCT-Folly/folly/portability/Time.h",
+      "#define CLOCK_REALTIME 0", "// #define CLOCK_REALTIME 0")
+    find_and_replace("Pods/RCT-Folly/folly/portability/Time.h",
+      "#define CLOCK_MONOTONIC 1", "// #define CLOCK_MONOTONIC 1")
+    find_and_replace("Pods/RCT-Folly/folly/portability/Time.h",
+      "#define CLOCK_PROCESS_CPUTIME_ID 2", "// #define CLOCK_PROCESS_CPUTIME_ID 2")
+    find_and_replace("Pods/RCT-Folly/folly/portability/Time.h",
+      "#define CLOCK_THREAD_CPUTIME_ID 3", "// #define CLOCK_THREAD_CPUTIME_ID 3")
+  end
+  
+  def find_and_replace(dir, findstr, replacestr)
+    Dir[dir].each do |name|
+      next unless File.file?(name)
+      text = File.read(name)
+      replace = text.gsub(findstr, replacestr)
+      if text != replace
+        puts "Fix: " + name
+        File.chmod(0644, name)
+        File.write(name, replace)
+        STDOUT.flush
+      end
+    end
+    Dir[dir + '*/'].each(&method(:find_and_replace))
   end
 end

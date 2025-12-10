@@ -13,8 +13,8 @@ const { width } = Dimensions.get('window');
 export const SkiaDemo = () => {
   // 无限平滑循环
   const progress = useTiming({
-    duration: 2000,
-    // loop: true,
+    duration: 5000,
+    loop: true,
   });
 
   const animatedPath = useComputedValue(() => {
@@ -27,8 +27,8 @@ export const SkiaDemo = () => {
     const t = progress.current;
 
     // 动态波动控制点（制造方向感）
-    const waveHeight = 60 + Math.sin(t * Math.PI * 2) * 30;
-    const waveOffsetX = Math.cos(t * Math.PI * 2) * 40;
+    const waveHeight = 60 + Math.sin(t * Math.PI * 2) * 300;
+    const waveOffsetX = Math.cos(t * Math.PI * 2) * 60;
 
     const controlX = (startX + endX) / 2 + waveOffsetX;
     const controlY = startY - waveHeight;

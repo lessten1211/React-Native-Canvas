@@ -11,6 +11,9 @@
   },
   "dependencies": {
     "@shopify/react-native-skia": "^0.1.221",
+    "expo": "~49.0.0",
+    "expo-gl": "~13.6.0",
+    "expo-modules-core": "~1.11.0",
     "react": "18.2.0",
     "react-native": "0.72.1"
   },
