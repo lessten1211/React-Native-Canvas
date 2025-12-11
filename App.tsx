@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 // import {SkiaDemo} from './components/SkiaDemo';
 import InteractiveGLView from './components/InteractiveGLView';
+import ThreePet from './components/ThreePet';
 
 function App(): JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
@@ -22,10 +23,11 @@ function App(): JSX.Element {
       <View style={styles.header}>
         <Text style={styles.title}>🎮 Interactive WebGL Demo</Text>
         <Text style={styles.subtitle}>
-          水平拖动旋转 · 垂直拖动缩放11
+          水平拖动旋转 · 垂直拖动缩放 ThreeJS
         </Text>
       </View>
-      <InteractiveGLView />
+      {/* <InteractiveGLView /> */}
+      <ThreePet />
     </SafeAreaView>
   );
 }
